@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>営業組織診断ツール｜無料で今すぐ診断</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif; background: #f8f8f6; color: #1a1a1a; }
+.hero { background: #0F6E56; color: white; padding: 60px 20px; text-align: center; }
+.hero h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.4; }
+.hero p { font-size: 16px; opacity: 0.85; margin-bottom: 24px; line-height: 1.7; }
+.hero .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 6px 16px; font-size: 13px; margin-bottom: 20px; }
+.start-btn { display: inline-block; background: white; color: #0F6E56; padding: 14px 32px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; border: none; }
+.start-btn:hover { background: #f0f0f0; }
+.container { max-width: 640px; margin: 0 auto; padding: 40px 20px; }
+.quiz-wrap { background: white; border-radius: 12px; padding: 32px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.progress-bar { height: 4px; background: #e8e8e8; border-radius: 2px; margin-bottom: 28px; }
+.progress-fill { height: 100%; border-radius: 2px; background: #1D9E75; transition: width 0.4s ease; }
+.step { display: none; }
+.step.active { display: block; }
+.step-label { font-size: 12px; color: #888; margin-bottom: 8px; letter-spacing: 0.05em; }
+.question { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.4; }
+.sub { font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.6; }
+.options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.option { padding: 14px 16px; border: 1.5px solid #e8e8e8; border-radius: 10px; cursor: pointer; font-size: 15px; color: #1a1a1a; transition: all 0.15s; background: white; text-align: left; }
+.option:hover { border-color: #1D9E75; background: #f0faf6; }
+.option.selected { border-color: #1D9E75; background: #e8f7f1; color: #0F6E56; font-weight: 600; }
+.nav { display: flex; gap: 10px; }
+.btn { padding: 12px 24px; border-radius: 8px; font-size: 15px; cursor: pointer; border: 1.5px solid #e8e8e8; background: white; color: #1a1a1a; font-weight: 600; }
+.btn:hover { background: #f8f8f8; }
+.btn.primary { background: #1D9E75; color: white; border-color: #1D9E75; }
+.btn.primary:hover { background: #0F6E56; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.result-wrap { display: none; }
+.score-card { background: #0F6E56; color: white; border-radius: 12px; padding: 28px; text-align: center; margin-bottom: 20px; }
+.score-num { font-size: 64px; font-weight: 700; line-height: 1; }
+.score-max { font-size: 18px; opacity: 0.7; margin-bottom: 8px; }
+.score-title { font-size: 20px; font-weight: 700; }
+.categories { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.cat-card { padding: 14px 16px; border: 1.5px solid #e8e8e8; border-radius: 10px; background: white; }
+.cat-name { font-size: 12px; color: #888; margin-bottom: 6px; }
+.cat-bar-bg { height: 6px; background: #e8e8e8; border-radius: 3px; margin-bottom: 6px; }
+.cat-bar-fill { height: 100%; border-radius: 3px; }
+.cat-score { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+.issues { margin-bottom: 20px; }
+.issue-title { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
+.issue-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-bottom: 8px; font-size: 14px; line-height: 1.5; }
+.issue-item.danger { background: #fef2f2; color: #7f1d1d; }
+.issue-item.warn { background: #fffbeb; color: #78350f; }
+.issue-item.ok { background: #f0fdf4; color: #14532d; }
+.issue-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.cta-box { background: #f0faf6; border: 1.5px solid #9FE1CB; border-radius: 12px; padding: 24px; text-align: center; }
+.cta-title { font-size: 18px; font-weight: 700; color: #0F6E56; margin-bottom: 8px; }
+.cta-text { font-size: 14px; color: #555; margin-bottom: 16px; line-height: 1.7; }
+.cta-btn { display: inline-block; background: #1D9E75; color: white; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; border: none; }
+.cta-btn:hover { background: #0F6E56; }
+.form-group { margin-bottom: 12px; text-align: left; }
+.form-group label { font-size: 13px; color: #555; display: block; margin-bottom: 4px; }
+.form-group input { width: 100%; padding: 10px 14px; border: 1.5px solid #e8e8e8; border-radius: 8px; font-size: 15px; }
+.form-group input:focus { outline: none; border-color: #1D9E75; }
+</style>
+</head>
+<body>
+
+<div class="hero" id="hero">
+  <div class="badge">無料・2分で完了</div>
+  <h1>あなたの営業組織は<br>何点ですか？</h1>
+  <p>SaaS・スタートアップ向け<br>営業組織の課題を8つの質問で診断します</p>
+  <button class="start-btn" onclick="startQuiz()">無料で診断する →</button>
+</div>
+
+<div class="container" id="quiz-section" style="display:none">
+  <div class="quiz-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+
+    <div class="step active" data-step="0">
+      <p class="step-label">01 / 08 — 組織体制</p>
+      <p class="question">IS・FS・CSは明確に分業できていますか？</p>
+      <p class="sub">役割の境界線と引き継ぎフローの整備状況を教えてください</p>
+      <div class="options">
+        <button class="option" data-val="3">完全に分業・フロー整備済み</button>
+        <button class="option" data-val="2">分業しているが引き継ぎが属人的</button>
+        <button class="option" data-val="1">兼務が多く役割が曖昧</button>
+        <button class="option" data-val="0">ほぼ1人が全部やっている</button>
+      </div>
+      <div class="nav"><button class="btn primary" id="next0" disabled onclick="next(0)">次へ →</button></div>
+    </div>
+
+    <div class="step" data-step="1">
+      <p class="step-label">02 / 08 — KPI設計</p>
+      <p class="question">各ポジションにKPIは設定されていますか？</p>
+      <p class="sub">数字で管理できているか、行動量と結果指標のバランスを確認します</p>
+      <div class="options">
+        <button class="option" data-val="3">行動・中間・最終KPIが全員に設定済み</button>
+        <button class="option" data-val="2">売上目標はあるが行動KPIが弱い</button>
+        <button class="option" data-val="1">目標はあるが管理できていない</button>
+        <button class="option" data-val="0">特に設定していない</button>
+      </div>
+      <div class="nav">
+        <button class="btn" onclick="back(1)">← 戻る</button>
+        <button class="btn primary" id="next1" disabled onclick="next(1)">次へ →</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="2">
+      <p class="step-label">03 / 08 — 育成</p>
+      <p class="question">営業メンバーの育成プログラムはありますか？</p>
+      <p class="sub">オンボーディング・ロープレ・1on1などの整備状況</p>
+      <div class="options">
+        <button class="option" data-val="3">オンボーディング〜継続育成まで体系化済み</button>
+        <button class="option" data-val="2">一部あるが属人的な部分が多い</button>
+        <button class="option" data-val="1">OJTのみ、仕組みはない</button>
+        <button class="option" data-val="0">特に育成はしていない</button>
+      </div>
+      <div class="nav">
+        <button class="btn" onclick="back(2)">← 戻る</button>
+        <button class="btn primary" id="next2" disabled onclick="next(2)">次へ →</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="3">
+      <p class="step-label">04 / 08 — パイプライン管理</p>
+      <p class="question">商談の進捗をリアルタイムで把握できていますか？</p>
+      <p class="sub">SFA・CRMの活用状況と管理精度</p>
+      <div class="options">
+        <button class="option" data-val="3">SFAで全商談を可視化・予測も精度高い</button>
+        <button class="option" data-val="2">SFAはあるが入力が徹底されていない</button>
+        <button class="option" data-val="1">スプレッドシート管理で属人的</button>
+        <button class="option" data-val="0">把握できていない</button>
+      </div>
+      <div class="nav">
+        <button class="btn" onclick="back(3)">← 戻る</button>
+        <button class="btn primary" id="next3" disabled onclick="next(3)">次へ →</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="4">
+      <p class="step-label">05 / 08 — 採用力</p>
+      <p class="question">営業人材の採用に課題はありますか？</p>
+      <p class="sub">採用要件の定義・媒体活用・見極め力</p>
+      <div class="options">
+        <button class="option" data-val="3">要件明確・採用チャネルも複数あり安定採用</button>
+        <button class="option" data-val="2">採用できているが質にばらつきがある</button>
+        <button class="option" data-val="1">採用に苦戦している</button>
+        <button class="option" data-val="0">採用の仕組みがほぼない</button>
+      </div>
+      <div class="nav">
+        <button class="btn" onclick="back(4)">← 戻る</button>
+        <button class="btn primary" id="next4" disabled onclick="next(4)">次へ →</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="5">
+      <p class="step-label">06 / 08 — 再現性</p>
+      <p class="question">トップセールスの手法は組織に展開できていますか？</p>
+      <p class="sub">勝ちパターンの言語化・横展開の状況</p>
+      <div class="options">
+        <button class="option" data-val="3">トークスクリプト・事例集が整備され横展開済み</button>
+        <button class="option" data-val="2">共有はしているが活用が属人的</button>
+        <button class="option" data-val="1">属人的で共有できていない</button>
+        <button class="option" data-val="0">トップ頼みで組織力が低い</button>
+      </div>
+      <div class="nav">
+        <button class="btn" onclick="back(5)">← 戻る</button>
+        <button class="btn primary" id="next5" disabled onclick="next(5)">次へ →</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="6">
+      <p class="step-label">07 / 08 — CS対応</p>
+      <p class="question">解約・チャーンの兆候を事前に検知できていますか？</p>
+      <p class="sub">ヘルススコア・定期フォローの整備状況</p>
+      <div class="options">
+        <button class="option" data-val="3">ヘルススコアで定期モニタリング・先手対応できている</button>
+        <button class="option" data-val="2">解約後に原因分析しているが予防は弱い</button>
+        <button class="option" data-val="1">解約が起きてから動く後手対応</button>
+        <button class="option" data-val="0">把握できていない</button>
+      </div>
+      <div class="nav">
+        <button class="btn" onclick="back(6)">← 戻る</button>
+        <button class="btn primary" id="next6" disabled onclick="next(6)">次へ →</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="7">
+      <p class="step-label">08 / 08 — 事業計画</p>
+      <p class="question">売上計画の精度と達成プロセスは明確ですか？</p>
+      <p class="sub">ボトムアップ計画・シナリオ設計の状況</p>
+      <div class="options">
+        <button class="option" data-val="3">ボトムアップで根拠ある計画・シナリオも複数</button>
+        <button class="option" data-val="2">計画はあるが根拠が弱く達成プロセスが曖昧</button>
+        <button class="option" data-val="1">トップダウンの数字を追っているだけ</button>
+        <button class="option" data-val="0">計画らしい計画がない</button>
+      </div>
+      <div class="nav">
+        <button class="btn" onclick="back(7)">← 戻る</button>
+        <button class="btn primary" id="next7" disabled onclick="showResult()">診断結果を見る →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-wrap" id="result-wrap">
+    <div class="score-card">
+      <div class="score-num" id="score-num">0</div>
+      <div class="score-max">/ 24点</div>
+      <div class="score-title" id="score-title">診断中...</div>
+    </div>
+    <div class="categories" id="categories"></div>
+    <div class="issues" id="issues"></div>
+    <div class="cta-box">
+      <div class="cta-title">無料相談を予約する</div>
+      <div class="cta-text">診断結果をもとに、営業組織の具体的な改善アクションをご提案します。初回30分無料。</div>
+      <div class="form-group"><label>お名前</label><input type="text" placeholder="山田 太郎"></div>
+      <div class="form-group"><label>メールアドレス</label><input type="email" placeholder="example@company.com"></div>
+      <button class="cta-btn">無料相談を申し込む →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const answers = new Array(8).fill(null);
+const cats = ['組織体制','KPI設計','育成','パイプライン','採用力','再現性','CS対応','事業計画'];
+const catColors = ['#1D9E75','#378ADD','#BA7517','#D85A30','#7F77DD','#1D9E75','#378ADD','#BA7517'];
+
+function startQuiz() {
+  document.getElementById('hero').style.display = 'none';
+  document.getElementById('quiz-section').style.display = 'block';
+}
+
+function selectOption(step, val, el) {
+  answers[step] = val;
+  document.querySelectorAll(`.step[data-step="${step}"] .option`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const nextBtn = document.getElementById('next' + step);
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+document.querySelectorAll('.option').forEach(btn => {
+  const step = parseInt(btn.closest('.step').dataset.step);
+  const val = parseInt(btn.dataset.val);
+  btn.addEventListener('click', () => selectOption(step, val, btn));
+});
+
+function updateProgress(step) {
+  document.getElementById('progress').style.width = ((step / 8) * 100) + '%';
+}
+
+function next(step) {
+  document.querySelector(`.step[data-step="${step}"]`).classList.remove('active');
+  document.querySelector(`.step[data-step="${step+1}"]`).classList.add('active');
+  updateProgress(step + 1);
+}
+
+function back(step) {
+  document.querySelector(`.step[data-step="${step}"]`).classList.remove('active');
+  document.querySelector(`.step[data-step="${step-1}"]`).classList.add('active');
+  updateProgress(step - 1);
+}
+
+function showResult() {
+  document.querySelector('.quiz-wrap').style.display = 'none';
+  const rw = document.getElementById('result-wrap');
+  rw.style.display = 'block';
+  const total = answers.reduce((a, b) => a + b, 0);
+  document.getElementById('score-num').textContent = total;
+  let title;
+  if (total >= 20) title = '営業組織の完成度は高い水準です';
+  else if (total >= 14) title = 'いくつかの領域に改善余地があります';
+  else if (total >= 8) title = '複数の課題が組織成長を阻害しています';
+  else title = '営業組織の基盤構築が急務です';
+  document.getElementById('score-title').textContent = title;
+  const catsHtml = answers.map((v, i) => {
+    const pct = Math.round((v / 3) * 100);
+    return `<div class="cat-card"><div class="cat-name">${cats[i]}</div><div class="cat-bar-bg"><div class="cat-bar-fill" style="width:${pct}%;background:${catColors[i]}"></div></div><div class="cat-score">${v} / 3</div></div>`;
+  }).join('');
+  document.getElementById('categories').innerHTML = catsHtml;
+  const issueData = answers.map((v, i) => ({cat: cats[i], val: v})).sort((a,b) => a.val - b.val);
+  let issuesHtml = '<div class="issue-title">優先対応が必要な領域</div>';
+  issueData.slice(0, 3).forEach(({cat, val}) => {
+    const cls = val === 0 ? 'danger' : val === 1 ? 'warn' : 'ok';
+    const dotColor = val === 0 ? '#E24B4A' : val === 1 ? '#BA7517' : '#1D9E75';
+    const msg = val === 0 ? '早急な仕組み化が必要' : val === 1 ? '改善余地あり・優先対応推奨' : '基本はできているが精度向上を';
+    issuesHtml += `<div class="issue-item ${cls}"><div class="issue-dot" style="background:${dotColor}"></div><div><strong>${cat}</strong>：${msg}</div></div>`;
+  });
+  document.getElementById('issues').innerHTML = issuesHtml;
+}
+</script>
+</body>
+</html>
