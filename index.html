@@ -18,422 +18,163 @@
   --border: #E2E2DC;
   --bg: #F7F6F2;
   --white: #FFFFFF;
-  --amber: #D4820A;
-  --red: #C53030;
+  --warn: #92650A;
+  --warn-pale: #FDF6E7;
+  --danger: #8B1F1F;
+  --danger-pale: #FDF0F0;
   --radius: 14px;
   --radius-sm: 8px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'Noto Sans JP', sans-serif;
-  background: var(--bg);
-  color: var(--ink);
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
+body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-/* HERO */
-.hero {
-  background: var(--green-dark);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -120px; right: -120px;
-  width: 480px; height: 480px;
-  border-radius: 50%;
-  background: rgba(18,168,124,0.12);
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -80px; left: -80px;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  background: rgba(18,168,124,0.08);
-}
+/* ── HERO ── */
+.hero { background: var(--green-dark); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -120px; right: -120px; width: 480px; height: 480px; border-radius: 50%; background: rgba(18,168,124,0.12); }
+.hero::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(18,168,124,0.08); }
 .hero-inner { position: relative; z-index: 1; text-align: center; max-width: 600px; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 100px;
-  padding: 6px 16px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.8);
-  margin-bottom: 28px;
-  letter-spacing: 0.05em;
-}
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 6px 16px; font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 28px; letter-spacing: 0.05em; }
 .hero-badge::before { content: '●'; color: #4FFFB0; font-size: 8px; }
-.hero h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(32px, 6vw, 52px);
-  color: var(--white);
-  line-height: 1.2;
-  margin-bottom: 20px;
-  letter-spacing: -0.02em;
-}
+.hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 6vw, 52px); color: var(--white); line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.02em; }
 .hero h1 span { color: #4FFFB0; }
-.hero-sub {
-  font-size: 16px;
-  color: rgba(255,255,255,0.7);
-  margin-bottom: 40px;
-  line-height: 1.8;
-}
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  margin-bottom: 40px;
-}
+.hero-sub { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 40px; line-height: 1.8; }
+.hero-stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; }
 .hero-stat { text-align: center; }
-.hero-stat-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 28px;
-  color: #4FFFB0;
-  display: block;
-}
+.hero-stat-num { font-family: 'DM Serif Display', serif; font-size: 28px; color: #4FFFB0; display: block; }
 .hero-stat-label { font-size: 11px; color: rgba(255,255,255,0.5); }
-.hero-cta {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: #4FFFB0;
-  color: var(--green-dark);
-  padding: 18px 40px;
-  border-radius: 100px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s;
-  box-shadow: 0 8px 32px rgba(79,255,176,0.3);
-}
+.hero-cta { display: inline-flex; align-items: center; gap: 10px; background: #4FFFB0; color: var(--green-dark); padding: 18px 40px; border-radius: 100px; font-size: 16px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; box-shadow: 0 8px 32px rgba(79,255,176,0.3); }
 .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(79,255,176,0.4); }
 .hero-cta::after { content: '→'; }
-.scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(255,255,255,0.3);
-  font-size: 12px;
-  animation: bounce 2s infinite;
-}
-@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
-/* QUIZ SECTION */
+/* ── QUIZ ── */
 .quiz-section { display: none; padding: 40px 16px 80px; min-height: 100vh; }
 .quiz-container { max-width: 640px; margin: 0 auto; }
 .quiz-header { text-align: center; margin-bottom: 32px; }
 .quiz-header h2 { font-size: 22px; font-weight: 700; color: var(--ink); }
 .quiz-header p { font-size: 14px; color: var(--ink-light); margin-top: 6px; }
-
 .progress-wrap { margin-bottom: 32px; }
 .progress-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
 .progress-label { font-size: 13px; color: var(--ink-light); }
 .progress-count { font-size: 13px; font-weight: 700; color: var(--green); }
 .progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--green-light)); border-radius: 3px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
-
-.card {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 32px 28px;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-  border: 1px solid var(--border);
-}
+.card { background: var(--white); border-radius: var(--radius); padding: 32px 28px; box-shadow: 0 2px 20px rgba(0,0,0,0.06); border: 1px solid var(--border); }
 .step { display: none; }
 .step.active { display: block; animation: fadeUp 0.3s ease; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-
-.step-tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--green-pale);
-  color: var(--green);
-  border-radius: 100px;
-  padding: 4px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  margin-bottom: 16px;
-}
+.step-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--green-pale); color: var(--green); border-radius: 100px; padding: 4px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 16px; }
 .question { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.5; }
 .question-sub { font-size: 14px; color: var(--ink-light); margin-bottom: 24px; line-height: 1.7; }
-
 .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-.option {
-  padding: 16px 20px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 15px;
-  color: var(--ink-mid);
-  background: var(--white);
-  text-align: left;
-  transition: all 0.15s;
-  display: flex; align-items: center; gap: 12px;
-  font-family: 'Noto Sans JP', sans-serif;
-  line-height: 1.5;
-}
-.option::before {
-  content: '';
-  width: 20px; height: 20px;
-  border: 2px solid var(--border);
-  border-radius: 50%;
-  flex-shrink: 0;
-  transition: all 0.15s;
-}
+.option { padding: 16px 20px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; font-size: 15px; color: var(--ink-mid); background: var(--white); text-align: left; transition: all 0.15s; display: flex; align-items: center; gap: 12px; font-family: 'Noto Sans JP', sans-serif; line-height: 1.5; }
+.option::before { content: ''; width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; transition: all 0.15s; }
 .option:hover { border-color: var(--green-light); background: var(--green-pale); color: var(--ink); }
 .option:hover::before { border-color: var(--green-light); }
 .option.selected { border-color: var(--green); background: var(--green-pale); color: var(--green-dark); font-weight: 500; }
 .option.selected::before { border-color: var(--green); background: var(--green); box-shadow: inset 0 0 0 3px var(--white); }
-
 .nav { display: flex; gap: 10px; align-items: center; }
-.btn-back {
-  padding: 12px 20px;
-  border: 1.5px solid var(--border);
-  border-radius: 100px;
-  background: var(--white);
-  color: var(--ink-mid);
-  font-size: 14px;
-  cursor: pointer;
-  font-family: 'Noto Sans JP', sans-serif;
-  transition: all 0.15s;
-}
+.btn-back { padding: 12px 20px; border: 1.5px solid var(--border); border-radius: 100px; background: var(--white); color: var(--ink-mid); font-size: 14px; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; transition: all 0.15s; }
 .btn-back:hover { border-color: var(--ink-mid); }
-.btn-next {
-  flex: 1;
-  padding: 14px 24px;
-  border-radius: 100px;
-  background: var(--green);
-  color: var(--white);
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  font-family: 'Noto Sans JP', sans-serif;
-  transition: all 0.2s;
-}
-.btn-next:hover:not(:disabled) { background: var(--green-dark); transform: translateY(-1px); }
-.btn-next:disabled { background: var(--border); color: var(--ink-light); cursor: not-allowed; transform: none; }
+.btn-next { flex: 1; padding: 14px 24px; border-radius: 100px; background: var(--ink); color: var(--white); font-size: 15px; font-weight: 700; cursor: pointer; border: none; font-family: 'Noto Sans JP', sans-serif; transition: all 0.2s; }
+.btn-next:hover:not(:disabled) { background: var(--green-dark); }
+.btn-next:disabled { background: var(--border); color: var(--ink-light); cursor: not-allowed; }
 
-/* RESULT */
+/* ── RESULT ── */
 .result-wrap { display: none; animation: fadeUp 0.4s ease; }
-.result-score-card {
-  background: var(--green-dark);
-  border-radius: var(--radius);
-  padding: 36px 28px;
-  text-align: center;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-}
-.result-score-card::before {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.05);
-}
+.result-score-card { background: var(--green-dark); border-radius: var(--radius); padding: 36px 28px; text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; }
+.result-score-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.05); }
 .result-score-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 8px; letter-spacing: 0.05em; }
-.result-score-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 80px;
-  color: #4FFFB0;
-  line-height: 1;
-  position: relative;
-}
+.result-score-num { font-family: 'DM Serif Display', serif; font-size: 80px; color: #4FFFB0; line-height: 1; position: relative; }
 .result-score-max { font-size: 18px; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
 .result-score-title { font-size: 20px; font-weight: 700; color: var(--white); }
 
+/* ── RESULT GRID（修正：色統一＋シンプル） ── */
 .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-.result-cat {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-}
-.result-cat-name { font-size: 11px; color: var(--ink-light); margin-bottom: 8px; font-weight: 500; }
-.result-cat-bar { height: 6px; background: var(--bg); border-radius: 3px; margin-bottom: 8px; overflow: hidden; }
-.result-cat-fill { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
-.result-cat-score { font-size: 13px; font-weight: 700; color: var(--ink); }
+.result-cat { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+.result-cat-name { font-size: 11px; color: var(--ink-light); margin-bottom: 10px; font-weight: 500; letter-spacing: 0.03em; }
+.result-cat-bar { height: 4px; background: var(--bg); border-radius: 2px; margin-bottom: 10px; overflow: hidden; }
+.result-cat-fill { height: 100%; border-radius: 2px; background: var(--green); transition: width 0.9s cubic-bezier(0.4,0,0.2,1); }
+.result-cat-score { font-size: 14px; font-weight: 700; color: var(--ink); }
 
-.issues-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px 24px;
-  margin-bottom: 20px;
-}
-.issues-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--ink); }
-.issue-item {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding: 14px 16px;
-  border-radius: var(--radius-sm);
-  margin-bottom: 8px;
-  font-size: 14px;
-  line-height: 1.6;
-}
-.issue-item:last-child { margin-bottom: 0; }
-.issue-item.danger { background: #FEF2F2; }
-.issue-item.warn { background: #FFFBEB; }
-.issue-item.good { background: var(--green-pale); }
-.issue-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
-.issue-content strong { display: block; font-size: 13px; margin-bottom: 2px; }
-.issue-item.danger strong { color: var(--red); }
-.issue-item.warn strong { color: var(--amber); }
-.issue-item.good strong { color: var(--green); }
-.issue-item.danger p { color: #7B1D1D; font-size: 13px; }
-.issue-item.warn p { color: #78350F; font-size: 13px; }
-.issue-item.good p { color: var(--green-dark); font-size: 13px; }
+/* ── ISSUES（修正：絵文字なし・縦ライン） ── */
+.issues-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 24px; margin-bottom: 20px; }
+.issues-card h3 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
+.issue-row { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--bg); }
+.issue-row:last-child { border-bottom: none; padding-bottom: 0; }
+.issue-line { width: 3px; height: 44px; border-radius: 2px; flex-shrink: 0; margin-top: 2px; }
+.issue-line.danger { background: #C53030; }
+.issue-line.warn { background: #D4820A; }
+.issue-line.good { background: var(--green); }
+.issue-body { flex: 1; }
+.issue-body strong { display: block; font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.issue-body p { font-size: 13px; color: var(--ink-light); line-height: 1.6; }
+.issue-badge { flex-shrink: 0; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; padding: 3px 8px; border-radius: 4px; margin-top: 2px; }
+.issue-badge.danger { background: var(--danger-pale); color: var(--danger); }
+.issue-badge.warn { background: var(--warn-pale); color: var(--warn); }
+.issue-badge.good { background: var(--green-pale); color: var(--green); }
 
-/* CTA */
-.cta-card {
-  background: var(--green-dark);
-  border-radius: var(--radius);
-  padding: 32px 28px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.cta-card::before {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 240px; height: 240px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.05);
-}
-.cta-card-inner { position: relative; z-index: 1; }
-.cta-badge {
-  display: inline-block;
-  background: rgba(79,255,176,0.15);
-  color: #4FFFB0;
-  border: 1px solid rgba(79,255,176,0.3);
-  border-radius: 100px;
-  padding: 4px 14px;
-  font-size: 11px;
-  font-weight: 700;
-  margin-bottom: 16px;
-  letter-spacing: 0.06em;
-}
+/* ── CTA ── */
+.cta-card { background: var(--green-dark); border-radius: var(--radius); padding: 32px 28px; text-align: center; position: relative; overflow: hidden; }
+.cta-card::before { content: ''; position: absolute; top: -80px; right: -80px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+.cta-inner { position: relative; z-index: 1; }
+.cta-badge { display: inline-block; background: rgba(79,255,176,0.15); color: #4FFFB0; border: 1px solid rgba(79,255,176,0.3); border-radius: 100px; padding: 4px 14px; font-size: 11px; font-weight: 700; margin-bottom: 16px; letter-spacing: 0.06em; }
 .cta-card h3 { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 10px; line-height: 1.4; }
-.cta-card p { font-size: 14px; color: rgba(255,255,255,0.65); margin-bottom: 28px; line-height: 1.8; }
-
-.lead-form { text-align: left; margin-bottom: 16px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.cta-card .cta-desc { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 28px; line-height: 1.8; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; text-align: left; }
 .form-group { display: flex; flex-direction: column; gap: 4px; }
 .form-group.full { grid-column: 1 / -1; }
-.form-group label { font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500; }
-.form-group input, .form-group select {
-  padding: 12px 14px;
-  border: 1.5px solid rgba(255,255,255,0.15);
-  border-radius: var(--radius-sm);
-  background: rgba(255,255,255,0.08);
-  color: var(--white);
-  font-size: 14px;
-  font-family: 'Noto Sans JP', sans-serif;
-  transition: border-color 0.15s;
-}
-.form-group input::placeholder { color: rgba(255,255,255,0.3); }
-.form-group input:focus, .form-group select:focus {
-  outline: none;
-  border-color: #4FFFB0;
-  background: rgba(255,255,255,0.12);
-}
-.form-group select { color: rgba(255,255,255,0.7); }
+.form-group label { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; font-weight: 500; }
+.form-group input, .form-group select { padding: 12px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); background: rgba(255,255,255,0.08); color: var(--white); font-size: 14px; font-family: 'Noto Sans JP', sans-serif; transition: border-color 0.12s; -webkit-appearance: none; }
+.form-group input::placeholder { color: rgba(255,255,255,0.25); }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: rgba(255,255,255,0.35); }
+.form-group select { color: rgba(255,255,255,0.5); }
 .form-group select option { color: var(--ink); background: var(--white); }
-
-.submit-btn {
-  width: 100%;
-  padding: 16px;
-  background: #4FFFB0;
-  color: var(--green-dark);
-  border: none;
-  border-radius: 100px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'Noto Sans JP', sans-serif;
-  transition: all 0.2s;
-  box-shadow: 0 4px 20px rgba(79,255,176,0.3);
-}
-.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,255,176,0.4); }
-.form-note { font-size: 11px; color: rgba(255,255,255,0.35); text-align: center; margin-top: 10px; }
-
+.submit-btn { width: 100%; margin-top: 16px; padding: 16px; background: #4FFFB0; color: var(--green-dark); border: none; border-radius: 100px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; transition: all 0.2s; box-shadow: 0 4px 20px rgba(79,255,176,0.3); }
+.submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(79,255,176,0.4); }
+.form-note { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; margin-top: 10px; }
 .thank-you { display: none; text-align: center; padding: 20px 0; }
-.thank-you-icon { font-size: 48px; margin-bottom: 16px; }
-.thank-you h3 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
-.thank-you p { font-size: 14px; color: rgba(255,255,255,0.6); }
+.thank-you-mark { width: 48px; height: 48px; border: 1.5px solid #4FFFB0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: #4FFFB0; font-size: 20px; }
+.thank-you h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.thank-you p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.8; }
 
-/* MOBILE */
 @media (max-width: 480px) {
   .card { padding: 24px 18px; }
   .question { font-size: 18px; }
-  .option { font-size: 14px; padding: 14px 16px; }
+  .option { font-size: 14px; }
   .result-score-num { font-size: 64px; }
-  .result-grid { grid-template-columns: 1fr 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .hero-stats { gap: 20px; }
-  .hero-stat-num { font-size: 22px; }
 }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-inner">
     <div class="hero-badge">SaaS・スタートアップ向け 無料診断</div>
     <h1>あなたの営業組織は<br><span>何点</span>ですか？</h1>
     <p class="hero-sub">8つの質問に答えるだけで、<br>営業組織の課題と改善優先順位が明確になります。</p>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-num">2分</span>
-        <span class="hero-stat-label">で完了</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">8問</span>
-        <span class="hero-stat-label">の質問</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">無料</span>
-        <span class="hero-stat-label">診断</span>
-      </div>
+      <div class="hero-stat"><span class="hero-stat-num">8問</span><span class="hero-stat-label">質問数</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">2分</span><span class="hero-stat-label">所要時間</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">無料</span><span class="hero-stat-label">完全無料</span></div>
     </div>
     <button class="hero-cta" onclick="startQuiz()">今すぐ無料で診断する</button>
   </div>
-  <div class="scroll-hint">↓</div>
 </section>
 
-<!-- QUIZ -->
 <section class="quiz-section" id="quiz-section">
   <div class="quiz-container">
-    <div class="quiz-header">
-      <h2>営業組織診断</h2>
-      <p>各質問について、現在の状況に最も近いものを選んでください</p>
-    </div>
-
+    <div class="quiz-header"><h2>営業組織診断</h2><p>各質問について、現在の状況に最も近いものを選んでください</p></div>
     <div class="progress-wrap">
-      <div class="progress-meta">
-        <span class="progress-label">進捗</span>
-        <span class="progress-count" id="progress-count">1 / 8</span>
-      </div>
+      <div class="progress-meta"><span class="progress-label">進捗</span><span class="progress-count" id="progress-count">1 / 8</span></div>
       <div class="progress-bar"><div class="progress-fill" id="progress" style="width:12.5%"></div></div>
     </div>
 
     <div class="card" id="quiz-card">
       <div class="step active" data-step="0">
-        <div class="step-tag">01 / 08 　組織体制</div>
+        <div class="step-tag">01 / 08　組織体制</div>
         <p class="question">IS・FS・CSは明確に分業できていますか？</p>
         <p class="question-sub">役割の境界線と引き継ぎフローの整備状況を教えてください</p>
         <div class="options">
@@ -442,29 +183,22 @@ body {
           <button class="option" data-val="1">兼務が多く役割が曖昧</button>
           <button class="option" data-val="0">ほぼ1人が全部やっている</button>
         </div>
-        <div class="nav">
-          <button class="btn-next" id="next0" disabled onclick="next(0)">次の質問へ →</button>
-        </div>
+        <div class="nav"><button class="btn-next" id="next0" disabled onclick="next(0)">次の質問へ →</button></div>
       </div>
-
       <div class="step" data-step="1">
-        <div class="step-tag">02 / 08 　KPI設計</div>
+        <div class="step-tag">02 / 08　KPI設計</div>
         <p class="question">各ポジションにKPIは設定されていますか？</p>
-        <p class="question-sub">数字で管理できているか、行動量と結果指標のバランスを確認します</p>
+        <p class="question-sub">行動量と結果指標のバランス、管理の精度を確認します</p>
         <div class="options">
           <button class="option" data-val="3">行動・中間・最終KPIが全員に設定済み</button>
           <button class="option" data-val="2">売上目標はあるが行動KPIが弱い</button>
           <button class="option" data-val="1">目標はあるが管理できていない</button>
           <button class="option" data-val="0">特に設定していない</button>
         </div>
-        <div class="nav">
-          <button class="btn-back" onclick="back(1)">← 戻る</button>
-          <button class="btn-next" id="next1" disabled onclick="next(1)">次の質問へ →</button>
-        </div>
+        <div class="nav"><button class="btn-back" onclick="back(1)">← 戻る</button><button class="btn-next" id="next1" disabled onclick="next(1)">次の質問へ →</button></div>
       </div>
-
       <div class="step" data-step="2">
-        <div class="step-tag">03 / 08 　育成</div>
+        <div class="step-tag">03 / 08　育成</div>
         <p class="question">営業メンバーの育成プログラムはありますか？</p>
         <p class="question-sub">オンボーディング・ロープレ・1on1などの整備状況</p>
         <div class="options">
@@ -473,14 +207,10 @@ body {
           <button class="option" data-val="1">OJTのみ、仕組みはない</button>
           <button class="option" data-val="0">特に育成はしていない</button>
         </div>
-        <div class="nav">
-          <button class="btn-back" onclick="back(2)">← 戻る</button>
-          <button class="btn-next" id="next2" disabled onclick="next(2)">次の質問へ →</button>
-        </div>
+        <div class="nav"><button class="btn-back" onclick="back(2)">← 戻る</button><button class="btn-next" id="next2" disabled onclick="next(2)">次の質問へ →</button></div>
       </div>
-
       <div class="step" data-step="3">
-        <div class="step-tag">04 / 08 　パイプライン</div>
+        <div class="step-tag">04 / 08　パイプライン管理</div>
         <p class="question">商談の進捗をリアルタイムで把握できていますか？</p>
         <p class="question-sub">SFA・CRMの活用状況と管理精度</p>
         <div class="options">
@@ -489,14 +219,10 @@ body {
           <button class="option" data-val="1">スプレッドシート管理で属人的</button>
           <button class="option" data-val="0">把握できていない</button>
         </div>
-        <div class="nav">
-          <button class="btn-back" onclick="back(3)">← 戻る</button>
-          <button class="btn-next" id="next3" disabled onclick="next(3)">次の質問へ →</button>
-        </div>
+        <div class="nav"><button class="btn-back" onclick="back(3)">← 戻る</button><button class="btn-next" id="next3" disabled onclick="next(3)">次の質問へ →</button></div>
       </div>
-
       <div class="step" data-step="4">
-        <div class="step-tag">05 / 08 　採用力</div>
+        <div class="step-tag">05 / 08　採用力</div>
         <p class="question">営業人材の採用に課題はありますか？</p>
         <p class="question-sub">採用要件の定義・媒体活用・見極め力</p>
         <div class="options">
@@ -505,14 +231,10 @@ body {
           <button class="option" data-val="1">採用に苦戦している</button>
           <button class="option" data-val="0">採用の仕組みがほぼない</button>
         </div>
-        <div class="nav">
-          <button class="btn-back" onclick="back(4)">← 戻る</button>
-          <button class="btn-next" id="next4" disabled onclick="next(4)">次の質問へ →</button>
-        </div>
+        <div class="nav"><button class="btn-back" onclick="back(4)">← 戻る</button><button class="btn-next" id="next4" disabled onclick="next(4)">次の質問へ →</button></div>
       </div>
-
       <div class="step" data-step="5">
-        <div class="step-tag">06 / 08 　再現性</div>
+        <div class="step-tag">06 / 08　再現性</div>
         <p class="question">トップセールスの手法は組織に展開できていますか？</p>
         <p class="question-sub">勝ちパターンの言語化・横展開の状況</p>
         <div class="options">
@@ -521,14 +243,10 @@ body {
           <button class="option" data-val="1">属人的で共有できていない</button>
           <button class="option" data-val="0">トップ頼みで組織力が低い</button>
         </div>
-        <div class="nav">
-          <button class="btn-back" onclick="back(5)">← 戻る</button>
-          <button class="btn-next" id="next5" disabled onclick="next(5)">次の質問へ →</button>
-        </div>
+        <div class="nav"><button class="btn-back" onclick="back(5)">← 戻る</button><button class="btn-next" id="next5" disabled onclick="next(5)">次の質問へ →</button></div>
       </div>
-
       <div class="step" data-step="6">
-        <div class="step-tag">07 / 08 　CS対応</div>
+        <div class="step-tag">07 / 08　CS対応</div>
         <p class="question">解約・チャーンの兆候を事前に検知できていますか？</p>
         <p class="question-sub">ヘルススコア・定期フォローの整備状況</p>
         <div class="options">
@@ -537,14 +255,10 @@ body {
           <button class="option" data-val="1">解約が起きてから動く後手対応</button>
           <button class="option" data-val="0">把握できていない</button>
         </div>
-        <div class="nav">
-          <button class="btn-back" onclick="back(6)">← 戻る</button>
-          <button class="btn-next" id="next6" disabled onclick="next(6)">次の質問へ →</button>
-        </div>
+        <div class="nav"><button class="btn-back" onclick="back(6)">← 戻る</button><button class="btn-next" id="next6" disabled onclick="next(6)">次の質問へ →</button></div>
       </div>
-
       <div class="step" data-step="7">
-        <div class="step-tag">08 / 08 　事業計画</div>
+        <div class="step-tag">08 / 08　事業計画</div>
         <p class="question">売上計画の精度と達成プロセスは明確ですか？</p>
         <p class="question-sub">ボトムアップ計画・シナリオ設計の状況</p>
         <div class="options">
@@ -553,14 +267,10 @@ body {
           <button class="option" data-val="1">トップダウンの数字を追っているだけ</button>
           <button class="option" data-val="0">計画らしい計画がない</button>
         </div>
-        <div class="nav">
-          <button class="btn-back" onclick="back(7)">← 戻る</button>
-          <button class="btn-next" id="next7" disabled onclick="showResult()">診断結果を見る →</button>
-        </div>
+        <div class="nav"><button class="btn-back" onclick="back(7)">← 戻る</button><button class="btn-next" id="next7" disabled onclick="showResult()">診断結果を見る →</button></div>
       </div>
     </div>
 
-    <!-- RESULT -->
     <div class="result-wrap" id="result-wrap">
       <div class="result-score-card">
         <div class="result-score-label">総合スコア</div>
@@ -577,48 +287,30 @@ body {
       </div>
 
       <div class="cta-card">
-        <div class="cta-card-inner">
+        <div class="cta-inner">
           <div class="cta-badge">初回30分 無料相談</div>
           <h3>診断結果をもとに<br>具体的な改善策をご提案します</h3>
-          <p>SaaS・スタートアップの営業組織構築に特化したアドバイスを提供します。まずはお気軽にご相談ください。</p>
-
-          <div class="lead-form" id="lead-form">
+          <p class="cta-desc">SaaS・スタートアップの営業組織構築に特化したアドバイスを提供します。まずはお気軽にご相談ください。</p>
+          <div id="lead-form">
             <div class="form-row">
-              <div class="form-group">
-                <label>お名前 *</label>
-                <input type="text" id="name" placeholder="山田 太郎">
-              </div>
-              <div class="form-group">
-                <label>会社名</label>
-                <input type="text" id="company" placeholder="株式会社〇〇">
-              </div>
+              <div class="form-group"><label>お名前</label><input type="text" id="f-name" placeholder="山田 太郎"></div>
+              <div class="form-group"><label>会社名</label><input type="text" id="f-company" placeholder="株式会社〇〇"></div>
             </div>
             <div class="form-row">
-              <div class="form-group full">
-                <label>メールアドレス *</label>
-                <input type="email" id="email" placeholder="yamada@company.com">
-              </div>
+              <div class="form-group full"><label>メールアドレス</label><input type="email" id="f-email" placeholder="yamada@company.com"></div>
             </div>
             <div class="form-row">
-              <div class="form-group full">
-                <label>営業組織の規模</label>
-                <select id="team-size">
-                  <option value="">選択してください</option>
-                  <option>1〜5名</option>
-                  <option>6〜20名</option>
-                  <option>21〜50名</option>
-                  <option>51名以上</option>
-                </select>
+              <div class="form-group full"><label>営業組織の規模</label>
+                <select id="f-size"><option value="">選択してください</option><option>1〜5名</option><option>6〜20名</option><option>21〜50名</option><option>51名以上</option></select>
               </div>
             </div>
             <button class="submit-btn" onclick="submitForm()">無料相談を申し込む →</button>
-            <p class="form-note">※ご入力いただいた情報は相談目的以外には使用しません</p>
+            <p class="form-note">入力いただいた情報は相談目的以外には使用しません</p>
           </div>
-
           <div class="thank-you" id="thank-you">
-            <div class="thank-you-icon">✅</div>
+            <div class="thank-you-mark">✓</div>
             <h3>お申し込みありがとうございます</h3>
-            <p>2営業日以内にメールにてご連絡いたします。<br>しばらくお待ちください。</p>
+            <p>2営業日以内にメールにてご連絡いたします。</p>
           </div>
         </div>
       </div>
@@ -629,101 +321,79 @@ body {
 <script>
 const answers = new Array(8).fill(null);
 const cats = ['組織体制','KPI設計','育成','パイプライン','採用力','再現性','CS対応','事業計画'];
-const catColors = ['#0A7C5C','#2563EB','#D4820A','#DC2626','#7C3AED','#0A7C5C','#2563EB','#D4820A'];
-const issueMessages = {
-  danger: ['早急な仕組み化が必要です。このまま放置すると組織スケールの大きな障壁になります。'],
-  warn: ['改善余地があります。優先的に取り組むことで組織力が向上します。'],
-  good: ['基本はできています。さらなる精度向上で競合優位性を高められます。']
-};
 
-function startQuiz() {
-  document.getElementById('hero').style.display = 'none';
-  document.getElementById('quiz-section').style.display = 'block';
-  window.scrollTo(0, 0);
+function startQuiz(){
+  document.getElementById('hero').style.display='none';
+  document.getElementById('quiz-section').style.display='block';
+  window.scrollTo(0,0);
 }
 
-document.querySelectorAll('.option').forEach(btn => {
-  const step = parseInt(btn.closest('.step').dataset.step);
-  const val = parseInt(btn.dataset.val);
-  btn.addEventListener('click', () => {
-    answers[step] = val;
-    btn.closest('.options').querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+document.querySelectorAll('.option').forEach(btn=>{
+  const step=parseInt(btn.closest('.step').dataset.step);
+  const val=parseInt(btn.dataset.val);
+  btn.addEventListener('click',()=>{
+    answers[step]=val;
+    btn.closest('.options').querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
     btn.classList.add('selected');
-    const nb = document.getElementById('next' + step);
-    if (nb) nb.disabled = false;
+    const nb=document.getElementById('next'+step);
+    if(nb) nb.disabled=false;
   });
 });
 
-function updateProgress(step) {
-  const pct = ((step + 1) / 8) * 100;
-  document.getElementById('progress').style.width = pct + '%';
-  document.getElementById('progress-count').textContent = (step + 1) + ' / 8';
+function updateProgress(step){
+  document.getElementById('progress').style.width=(((step+1)/8)*100)+'%';
+  document.getElementById('progress-count').textContent=(step+1)+' / 8';
 }
 
-function next(step) {
+function next(step){
   document.querySelector(`.step[data-step="${step}"]`).classList.remove('active');
   document.querySelector(`.step[data-step="${step+1}"]`).classList.add('active');
-  updateProgress(step + 1);
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  updateProgress(step+1);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function back(step) {
+function back(step){
   document.querySelector(`.step[data-step="${step}"]`).classList.remove('active');
   document.querySelector(`.step[data-step="${step-1}"]`).classList.add('active');
-  updateProgress(step - 1);
+  updateProgress(step-1);
 }
 
-function showResult() {
-  document.getElementById('quiz-card').style.display = 'none';
-  const rw = document.getElementById('result-wrap');
-  rw.style.display = 'block';
-  window.scrollTo({top: 0, behavior: 'smooth'});
-
-  const total = answers.reduce((a, b) => a + b, 0);
-  document.getElementById('score-num').textContent = total;
-
+function showResult(){
+  document.getElementById('quiz-card').style.display='none';
+  document.getElementById('result-wrap').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  const total=answers.reduce((a,b)=>a+b,0);
+  document.getElementById('score-num').textContent=total;
   let title;
-  if (total >= 20) title = '優秀 — 組織の完成度は高い水準です';
-  else if (total >= 14) title = '標準 — いくつかの領域に改善余地があります';
-  else if (total >= 8) title = '要改善 — 複数の課題が成長を阻害しています';
-  else title = '緊急 — 基盤構築が急務です';
-  document.getElementById('score-title').textContent = title;
+  if(total>=20) title='優秀 — 組織の完成度は高い水準です';
+  else if(total>=14) title='標準 — いくつかの領域に改善余地があります';
+  else if(total>=8) title='要改善 — 複数の課題が成長を阻害しています';
+  else title='緊急 — 基盤構築が急務の状態です';
+  document.getElementById('score-title').textContent=title;
 
-  const grid = document.getElementById('result-grid');
-  grid.innerHTML = answers.map((v, i) => {
-    const pct = Math.round((v / 3) * 100);
-    return `<div class="result-cat">
-      <div class="result-cat-name">${cats[i]}</div>
-      <div class="result-cat-bar"><div class="result-cat-fill" style="width:0%;background:${catColors[i]}" data-width="${pct}"></div></div>
-      <div class="result-cat-score">${v} / 3点</div>
-    </div>`;
+  document.getElementById('result-grid').innerHTML=answers.map((v,i)=>{
+    const pct=Math.round((v/3)*100);
+    return `<div class="result-cat"><div class="result-cat-name">${cats[i]}</div><div class="result-cat-bar"><div class="result-cat-fill" style="width:0%" data-w="${pct}"></div></div><div class="result-cat-score">${v} / 3点</div></div>`;
   }).join('');
+  setTimeout(()=>{ document.querySelectorAll('.result-cat-fill').forEach(el=>{ el.style.width=el.dataset.w+'%'; }); },100);
 
-  setTimeout(() => {
-    document.querySelectorAll('.result-cat-fill').forEach(el => {
-      el.style.width = el.dataset.width + '%';
-    });
-  }, 100);
-
-  const sorted = answers.map((v, i) => ({cat: cats[i], val: v, idx: i})).sort((a,b) => a.val - b.val);
-  const issuesList = document.getElementById('issues-list');
-  issuesList.innerHTML = sorted.slice(0, 4).map(({cat, val}) => {
-    const cls = val === 0 ? 'danger' : val === 1 ? 'warn' : 'good';
-    const icon = val === 0 ? '🔴' : val === 1 ? '🟡' : '🟢';
-    const msg = val === 0 ? issueMessages.danger[0] : val === 1 ? issueMessages.warn[0] : issueMessages.good[0];
-    return `<div class="issue-item ${cls}">
-      <span class="issue-icon">${icon}</span>
-      <div class="issue-content"><strong>${cat}</strong><p>${msg}</p></div>
-    </div>`;
+  const sorted=answers.map((v,i)=>({cat:cats[i],val:v})).sort((a,b)=>a.val-b.val);
+  document.getElementById('issues-list').innerHTML=sorted.slice(0,4).map(({cat,val})=>{
+    const cls=val===0?'danger':val===1?'warn':'good';
+    const badge=val===0?'緊急':val===1?'要改善':'良好';
+    const msg=val===0?'早急な仕組み化が必要です。放置すると組織スケールの大きな障壁になります。'
+             :val===1?'改善余地があります。優先的に取り組むことで組織力が向上します。'
+             :'基本はできています。さらなる精度向上で競合優位性を高められます。';
+    return `<div class="issue-row"><div class="issue-line ${cls}"></div><div class="issue-body"><strong>${cat}</strong><p>${msg}</p></div><div class="issue-badge ${cls}">${badge}</div></div>`;
   }).join('');
 }
 
-function submitForm() {
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  if (!name || !email) { alert('お名前とメールアドレスを入力してください'); return; }
-  document.getElementById('lead-form').style.display = 'none';
-  document.getElementById('thank-you').style.display = 'block';
+function submitForm(){
+  const name=document.getElementById('f-name').value;
+  const email=document.getElementById('f-email').value;
+  if(!name||!email){ alert('お名前とメールアドレスを入力してください'); return; }
+  document.getElementById('lead-form').style.display='none';
+  document.getElementById('thank-you').style.display='block';
 }
 </script>
 </body>
